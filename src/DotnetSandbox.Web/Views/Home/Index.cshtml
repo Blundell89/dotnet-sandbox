@@ -1,6 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model DotnetSandbox.Web.Data.Post[]
+
+@foreach (var post in Model)
+{
+    <div>Title: @post.Title</div>
+    <div>Content: @post.Content</div>
+    <div>
+        <div>Tags</div>
+        <ul>
+            @foreach (var tag in post.PostTags)
+            {
+                <li>@tag.Tag.Name</li>
+            }
+        </ul>
+    </div>
+
+    <div>
+        <h1>Update</h1>
+    
+        <div>
+            <form asp-controller="Home" asp-action="Update" method="post">
+                <input name="PostId" type="hidden" value="@post.Id"/>
+                <button class="btn btn-lg">Set to data</button>
+            </form>
+        </div>
+    </div>
+}
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
